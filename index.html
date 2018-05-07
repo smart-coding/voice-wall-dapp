@@ -28,7 +28,7 @@
 	            </h3>
 	     	</div>
             <div class="wrapper wrapper-content">
-                <ul class="notes">
+                <ul class="notes" id = "block-wall">
                     <li>
                         <div>
                             <small>2018年5月7日  13:31</small>
@@ -99,14 +99,14 @@
 	    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
 	    var nebPay = new NebPay();
 	    
-	    if(typeof(webExtensionWallet) === "undefined"){
+	    if (typeof(webExtensionWallet) === "undefined") {
             //alert ("Extension wallet is not installed, please install it first.")
             $("#noExtension").removeClass("hide")
         } else {
         	
         }
 	    // 合约地址
-	    var dappAddress = "n1pZWwmdnd5qxaJwvG6TtNivgLkacXmjz84";
+	    var dappAddress = "n1oDUY9oFTkucgDwMWanCp1Z1yeBnxPsWBY";
 	    // 抓取信息
 	    function getWallInfo(limit, offset) {
 	    	 var to = dappAddress;
@@ -121,7 +121,17 @@
 	    function handleResp(resp) {
 	    	 var result = resp.result
 	         console.log("return of rpc call: " + JSON.stringify(result))
-	         
+	         if (result === 'null') {
+	        	 // 空
+	         } else {
+	        	 $.each(JSON.parse(result), function(idx, obj) {
+	        		 console.log("return of rpc call: " + JSON.stringify(obj));
+	        		 console.log(obj.nick);
+	        		 console.log(obj.msg);
+	        		 console.log(obj.time);
+	        		 console.log(obj.like);
+	        	});
+	         }
 	         
 	    }
 	    // 上墙
@@ -129,7 +139,7 @@
 	    	 var to = dappAddress;
 	         var value = "0";
 	         var callFunction = "save"
-	         var callArgs = "[\"" + nick + "\",\"" + msg + "\",\"" + date + "\"]"
+	         var callArgs = "[\"" + nick + "\",\"" + msg + "\",\""  +date + "\"]"
 
 	         nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
 	             listener: pushWall
@@ -137,17 +147,18 @@
 	    }
 	    // 上墙保存信息回调
 	    function pushWall(resp) {
-	    	 console.log("response of push: " + resp)
+	    	 console.log("response of push: " + JSON.stringify(resp));
 	    }
 	    // 我要上墙，直接保存操作
 	    $("#jumpWall").click(function() {
-	    	var date = new Date().getTime(); 
-	    	saveInfo("test", "你好哈哈哈", date);
+	    	var date = new Date().getTime().toString(); 
+	    	console.log(date);
+	    	saveInfo("八戒", "今天天气不错", date);
 	    });
 	    // 查询信息
 	    $("#wallInfo").click(function() {
 	    	console.log("get info****");
-	    	getWallInfo(10, 0);
+	    	getWallInfo("10", "0");
 	    });
     </script>
 </body>

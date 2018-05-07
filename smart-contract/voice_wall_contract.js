@@ -3,17 +3,17 @@
 var VoiceItem = function(text) {
 	if (text) {
 		var obj = JSON.parse(text);
-		this.nick = obj.nick;// 昵称
-		this.msg = obj.msg;// 留下的信息
-		this.date = obj.date;// 日期
-		this.author = obj.author;// 留言人 
-		this.like = obj.like;//后续加入点赞
+		this.nick = obj.nick;// nickname
+		this.msg = obj.msg;// message
+		this.time = obj.time;// leave time
+		this.author = obj.author;// author
+		this.like = obj.like;// like it
 	} else {
 	    this.nick = "";
 	    this.msg = "";
-	    this.date = "";
+	    this.time = "";
 	    this.author = "";
-	    this.like = 0;
+	    this.like = "0";
 	}
 };
 
@@ -41,25 +41,24 @@ VoiceWall.prototype = {
     	this.size = 0;
     },
 
-    save: function (nick, msg, date) {
-
+    save: function (nick, msg, time) {
         nick = nick.trim();
         msg = msg.trim();
         if (msg === "") {
             throw new Error("empty msg");
         }
         if (nick.length > 32 || msg.length > 128) {
-            throw new Error("key / value exceed limit length")
+            throw new Error("nick / msg exceed limit length")
         }
 
         var from = Blockchain.transaction.from;
-        var key = date + from;// 暂用当前时间作为key
+        var key = time + "_" + from;// current key
         var voiceItem = new VoiceItem();
         voiceItem.author = from;
         voiceItem.nick = nick;
         voiceItem.msg = msg;
-        voiceItem.date = date
-        voiceItem.like = 0;
+        voiceItem.time = time;
+        voiceItem.like = "0";
         this.arrayMap.set(this.size, key); // 序列索引
         this.repo.put(key, voiceItem); // 数据存储
         this.size +=1;
@@ -74,8 +73,8 @@ VoiceWall.prototype = {
          if (!item) {
         	 throw new Error("voice item not exist");
          }
-         var like = item.like;
-         item.like = like + 1;
+         var like = parseInt(item.like) + 1;
+         item.like = like.toString();
          this.repo.set(key, item);
     },
     
@@ -103,10 +102,10 @@ VoiceWall.prototype = {
             var obj = this.repo.get(key);
             result.push(obj);
         }
-        return JSON.stringify(result);
+        return result;
     },
     del: function (key) {
-    	// TODO 暂不开放
+    	// TODO 
     }
 };
 module.exports = VoiceWall;
