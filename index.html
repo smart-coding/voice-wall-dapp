@@ -17,14 +17,17 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="white-bg">
 	 
     <div class="row">
-    	<div class="col-sm-12 noExtension hide" id="noExtension">
-            NOTE: Please install <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>  to use Voice Wall
-     	</div>
         <div class="col-sm-12">
-            <div class="wrapper wrapper-content animated fadeInUp">
+        	<div class="ibox-content text-center noExtension hide" id="noExtension">
+        		<h3>
+	            NOTE: Please install <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">
+	            WebExtensionWallet</a>  to use Voice Wall
+	            </h3>
+	     	</div>
+            <div class="wrapper wrapper-content">
                 <ul class="notes">
                     <li>
                         <div>
@@ -71,12 +74,22 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>某某某</h4>
                             <p>某某某房间按时发来看的萨芬就离开第三放假啦开发 </p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a href=""><i class="fa fa-thumbs-up ">666</i></a>
                         </div>
                     </li>
                 </ul>
+                
             </div>
+            
+            <div class="ibox-content text-center">
+            	<a class="btn btn-primary btn-rounded " id = "jumpWall">
+         		<i class="fa fa-info-circle"></i> 我有话说，我要上墙</a>
+         		
+         		<a class="btn btn-primary btn-rounded" id = "wallInfo">
+         		<i class="fa fa-info-circle"></i> 下一面墙</a>
+         	</div>
         </div>
+        
     </div>
 
     <script src="lib/jquery-3.3.1.min.js"></script>
@@ -89,8 +102,53 @@
 	    if(typeof(webExtensionWallet) === "undefined"){
             //alert ("Extension wallet is not installed, please install it first.")
             $("#noExtension").removeClass("hide")
-        }else{
+        } else {
+        	
         }
+	    // 合约地址
+	    var dappAddress = "n1pZWwmdnd5qxaJwvG6TtNivgLkacXmjz84";
+	    // 抓取信息
+	    function getWallInfo(limit, offset) {
+	    	 var to = dappAddress;
+	         var value = "0";
+	         var callFunction = "forEach";
+	         var callArgs = "[\"" + limit + "\",\"" + offset + "\"]"; //in the form of ["args"]
+	         nebPay.simulateCall(to, value, callFunction, callArgs, {    //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
+	             listener: handleResp      //指定回调函数
+	         });
+	    }
+	    // 抓取信息响应
+	    function handleResp(resp) {
+	    	 var result = resp.result
+	         console.log("return of rpc call: " + JSON.stringify(result))
+	         
+	         
+	    }
+	    // 上墙
+	    function saveInfo(nick, msg, date) {
+	    	 var to = dappAddress;
+	         var value = "0";
+	         var callFunction = "save"
+	         var callArgs = "[\"" + nick + "\",\"" + msg + "\",\"" + date + "\"]"
+
+	         nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
+	             listener: pushWall
+	         });
+	    }
+	    // 上墙保存信息回调
+	    function pushWall(resp) {
+	    	 console.log("response of push: " + resp)
+	    }
+	    // 我要上墙，直接保存操作
+	    $("#jumpWall").click(function() {
+	    	var date = new Date().getTime(); 
+	    	saveInfo("test", "你好哈哈哈", date);
+	    });
+	    // 查询信息
+	    $("#wallInfo").click(function() {
+	    	console.log("get info****");
+	    	getWallInfo(10, 0);
+	    });
     </script>
 </body>
 </html>

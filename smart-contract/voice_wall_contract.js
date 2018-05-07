@@ -41,7 +41,7 @@ VoiceWall.prototype = {
     	this.size = 0;
     },
 
-    save: function (nick, msg) {
+    save: function (nick, msg, date) {
 
         nick = nick.trim();
         msg = msg.trim();
@@ -53,14 +53,14 @@ VoiceWall.prototype = {
         }
 
         var from = Blockchain.transaction.from;
-        var key = new Date().getTime();// 暂用当前时间作为key
-        voiceItem = new VoiceItem();
+        var key = date + from;// 暂用当前时间作为key
+        var voiceItem = new VoiceItem();
         voiceItem.author = from;
         voiceItem.nick = nick;
         voiceItem.msg = msg;
-        voiceItem.date = key
+        voiceItem.date = date
         voiceItem.like = 0;
-        this.arrayMap.set(index, key); // 序列索引
+        this.arrayMap.set(this.size, key); // 序列索引
         this.repo.put(key, voiceItem); // 数据存储
         this.size +=1;
     },
@@ -97,7 +97,7 @@ VoiceWall.prototype = {
         if(number > this.size){
           number = this.size;
         }
-        var result = "[]";
+        var result = new Array();
         for (var i = offset; i < number; i++) {
             var key = this.arrayMap.get(i);
             var obj = this.repo.get(key);
