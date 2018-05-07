@@ -71,8 +71,8 @@
                     </li>
                     <li>
                         <div>
+                        	<h4>某某某</h4>
                             <small>2018年5月7日  13:31</small>
-                            <h4>某某某</h4>
                             <p>某某某房间按时发来看的萨芬就离开第三放假啦开发 </p>
                             <a href=""><i class="fa fa-thumbs-up ">666</i></a>
                         </div>
@@ -95,6 +95,7 @@
     <script src="lib/jquery-3.3.1.min.js"></script>
     <script src="lib/bootstrap.min.js?v=3.3.6"></script>
     <script src=lib/nebPay.js></script>
+    <script src=lib/dateFormat.js></script>
     <script type="text/javascript">
 	    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
 	    var nebPay = new NebPay();
@@ -124,12 +125,14 @@
 	         if (result === 'null') {
 	        	 // 空
 	         } else {
+	        	 var wall =  $("#block-wall");
+	        	 wall.find("li").remove();
 	        	 $.each(JSON.parse(result), function(idx, obj) {
 	        		 console.log("return of rpc call: " + JSON.stringify(obj));
-	        		 console.log(obj.nick);
-	        		 console.log(obj.msg);
-	        		 console.log(obj.time);
-	        		 console.log(obj.like);
+                 var item = "<li> <div> <small>发表于：" + obj.time
+                 	+ "</small><h4>" + obj.nick + "</h4><p>"+ obj.msg 
+                 	+ "</p> <a href=''> <i class='fa fa-thumbs-up '></i></a></div> </li>"
+	        	 wall.append($(item));
 	        	});
 	         }
 	         
@@ -151,7 +154,7 @@
 	    }
 	    // 我要上墙，直接保存操作
 	    $("#jumpWall").click(function() {
-	    	var date = new Date().getTime().toString(); 
+	    	var date = getSmpFormatDate(new Date(), true); 
 	    	console.log(date);
 	    	saveInfo("八戒", "今天天气不错", date);
 	    });
