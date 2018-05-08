@@ -227,7 +227,7 @@
 	         var value = "0";
 	         var callFunction = "forEach";
 	         var callArgs = "[\"" + limit + "\",\"" + offset + "\"]"; //in the form of ["args"]
-	         console.log("*******************callArgs:" + callArgs);
+	         //console.log("callArgs:" + callArgs);
 	         nebPay.simulateCall(to, value, callFunction, callArgs, {    //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
 	             listener: handleResp      //指定回调函数
 	         });
@@ -235,7 +235,7 @@
 	    // 抓取信息响应
 	    function handleResp(resp) {
 	    	 var result = resp.result
-	         console.log("return of rpc call: " + JSON.stringify(result))
+	         //console.log("return of rpc call: " + JSON.stringify(result))
 	         if (result === 'null') {
 	        	 // 空
 	         } else {
@@ -264,11 +264,8 @@
 	    }
 	    // 上墙保存信息回调
 	    function pushWall(resp) {
-	    	 console.log("response of push: " + JSON.stringify(resp));
-	    	 /* layer.tips('操作已完成，区块链矿工打包需要时间，请稍后刷新翻阅。', 'jumpWall', {
-	    		  tips: [1, '#3595CC'],
-	    		  time: 4000
-	    		}); */
+	    	 //console.log("response of push: " + JSON.stringify(resp));
+	    	 layer.alert('操作已完成，区块链矿工打包需要时间，请稍后刷新翻阅。', {icon: 6});
 	    }
 	    // 我要上墙，直接保存操作
 	    $("#jumpWall").click(function() {
@@ -311,7 +308,6 @@
 	    				  return false;
 	    			  }
 	    			  var date = getSmpFormatDate(new Date(), true); 
-	    		      console.log(date);
 	    			  saveInfo(nick, msg, date);
 	    			  layer.closeAll();
 	    			}
