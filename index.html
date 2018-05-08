@@ -13,19 +13,67 @@
     <link href="lib/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="lib/css/animate.min.css" rel="stylesheet">
-    <link href="lib/css/style.min.css" rel="stylesheet">
-
+    <link href="lib/css/style.css" rel="stylesheet">
+	<style type="text/css">
+	
+		body.bg {
+			background: url(lib/img/background.jpg) no-repeat center fixed;
+		}
+		.text-center h2{
+			color: #333;
+		}
+		.pb10 {
+			padding-bottom: 10px;
+		}
+		.pull-right{
+			float: right!important;
+			padding-right: 80px;
+		}
+		#mask{
+			display: none;
+			width: 100%;
+			position: fixed;
+			z-index: 99;
+			height: 100%;
+			background: rgba(51,122,183,1);
+			opacity:0.6;
+			filter:progid:DXImageTransform.Microsoft.gradient(startColors=#99000000, endColors=#99000000);
+		}
+		#addWallInfo {
+		   display: none;	    
+           width: 400px;   
+           height: 400px;  
+           position: absolute;  
+           left: 50%; 
+           top: 50%;  
+           margin-top: -200px;           
+           margin-left: -200px;         
+           border:1px solid;
+  		}
+  		.wallForm{
+  			padding-top: 10px;
+  		}
+  		form .form-group{
+  			margin-top: 10px;
+  		}
+	</style>
 </head>
 
-<body class="white-bg">
-	 
+<body class="white-bg bg">
+	  <div class="mask" id ="mask">
+         <div class="sk-spinner sk-spinner-wave" style="margin-top: 60px;">
+             <div class="sk-rect1"></div>
+             <div class="sk-rect2"></div>
+             <div class="sk-rect3"></div>
+             <div class="sk-rect4"></div>
+             <div class="sk-rect5"></div>
+         </div>
+     </div>
     <div class="row">
         <div class="col-sm-12">
-        	<div class="ibox-content text-center noExtension hide" id="noExtension">
-        		<h3>
-	            NOTE: Please install <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">
-	            WebExtensionWallet</a>  to use Voice Wall
-	            </h3>
+	     	<div  class="text-center" > 
+	     		<h2>写在区块链上的话</h2>
+	     		<h4>区块链不会说谎，区块链不会遗忘，将你的心声刻录在区块链上。</h4>
 	     	</div>
             <div class="wrapper wrapper-content">
                 <ul class="notes" id = "block-wall">
@@ -69,6 +117,40 @@
                             <a href=""><i class="fa fa-thumbs-up "></i></a>
                         </div>
                     </li>
+                    
+                     <li>
+                        <div>
+                            <small>2018年5月7日  13:31</small>
+                            <h4>某某某</h4>
+                             <p>今天天气不错！</p>
+                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                        </div>
+                    </li>
+                     <li>
+                        <div>
+                            <small>2018年5月7日  13:31</small>
+                            <h4>某某某</h4>
+                             <p>今天天气不错！</p>
+                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                        </div>
+                    </li>
+                     <li>
+                        <div>
+                            <small>2018年5月7日  13:31</small>
+                            <h4>某某某</h4>
+                             <p>今天天气不错！</p>
+                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                        </div>
+                    </li>
+                     <li>
+                        <div>
+                            <small>2018年5月7日  13:31</small>
+                            <h4>某某某</h4>
+                             <p>今天天气不错！</p>
+                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                        </div>
+                    </li>
+                    
                     <li>
                         <div>
                         	<h4>某某某</h4>
@@ -80,31 +162,62 @@
                 </ul>
                 
             </div>
-            
-            <div class="ibox-content text-center">
-            	<a class="btn btn-primary btn-rounded " id = "jumpWall">
-         		<i class="fa fa-info-circle"></i> 我有话说，我要上墙</a>
-         		
-         		<a class="btn btn-primary btn-rounded" id = "wallInfo">
-         		<i class="fa fa-info-circle"></i> 下一面墙</a>
-         	</div>
+        </div>
+        
+        <div class="text-center pb10">
+           	<a class="btn btn-primary btn-rounded " id = "jumpWall">
+        		<i class="fa fa-info-circle"></i> 我要上墙</a>
+        		
+        		<a class="btn btn-primary btn-rounded" id = "lastWallInfo">
+        		<i class="fa fa-info-circle"></i> 上一面墙</a>
+        		
+        		<a class="btn btn-primary btn-rounded" id = "nextWallInfo">
+        		<i class="fa fa-info-circle"></i> 下一面墙</a>
         </div>
         
     </div>
+	 <div class="footer">
+         <div class="pull-right">
+             NAS钱包打赏：<a>n1To7R91FvZZttm6HDLBhoMTkHVbkVrFvTo</a> &copy; 2018-2020 <a href="https://github.com/smart-coding" target="blank">Github联系我</a>
+         </div>
+	 </div>
+	 <!-- 弹层代码 -->
+	 <div id = "addWallInfo">
+             <div class="form-group" style="margin-top: 15px">
+                 <label class="col-sm-3 control-label">昵称：</label>
 
+                 <div class="col-sm-8">
+                     <input type="text" placeholder="输入你的昵称" class="form-control"> 
+                 </div>
+             </div>
+             <div class="form-group" style="margin-top: 65px">
+                 <label class="col-sm-3 control-label">我想说：</label>
+                 <div class="col-sm-8">
+                     <textarea name = "msg" class="form-control"></textarea>
+                 </div>
+             </div>
+	 </div>
     <script src="lib/jquery-3.3.1.min.js"></script>
     <script src="lib/bootstrap.min.js?v=3.3.6"></script>
     <script src=lib/nebPay.js></script>
     <script src=lib/dateFormat.js></script>
+    <script src="lib/plugin/layer/layer.js"></script>
     <script type="text/javascript">
-	    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+	    var NebPay = require("nebpay");
 	    var nebPay = new NebPay();
 	    
+	    var page = 1;
 	    if (typeof(webExtensionWallet) === "undefined") {
-            //alert ("Extension wallet is not installed, please install it first.")
-            $("#noExtension").removeClass("hide")
+	    	// 提示信息
+	    	 var info = "请使用Chrome浏览器并安装 <a target='_blank' href='https://github.com/ChengOrangeJu/WebExtensionWallet'>"
+        		+ "星云链钱包插件(WebExtensionWallet)</a>  然后体验本Dapp。"
+       		layer.open({
+       			  title: '使用说明'
+       			  ,content: info
+       			});   
+            $(".btn").attr("disabled",true)
         } else {
-        	
+        	$("#mask").show();
         }
 	    // 合约地址
 	    var dappAddress = "n1oDUY9oFTkucgDwMWanCp1Z1yeBnxPsWBY";
@@ -114,6 +227,7 @@
 	         var value = "0";
 	         var callFunction = "forEach";
 	         var callArgs = "[\"" + limit + "\",\"" + offset + "\"]"; //in the form of ["args"]
+	         console.log("*******************callArgs:" + callArgs);
 	         nebPay.simulateCall(to, value, callFunction, callArgs, {    //使用nebpay的simulateCall接口去执行get查询, 模拟执行.不发送交易,不上链
 	             listener: handleResp      //指定回调函数
 	         });
@@ -134,8 +248,8 @@
                  	+ "</p> <a href=''> <i class='fa fa-thumbs-up '></i></a></div> </li>"
 	        	 wall.append($(item));
 	        	});
+	        	$("#mask").hide()
 	         }
-	         
 	    }
 	    // 上墙
 	    function saveInfo(nick, msg, date) {
@@ -151,18 +265,77 @@
 	    // 上墙保存信息回调
 	    function pushWall(resp) {
 	    	 console.log("response of push: " + JSON.stringify(resp));
+	    	 /* layer.tips('操作已完成，区块链矿工打包需要时间，请稍后刷新翻阅。', 'jumpWall', {
+	    		  tips: [1, '#3595CC'],
+	    		  time: 4000
+	    		}); */
 	    }
 	    // 我要上墙，直接保存操作
 	    $("#jumpWall").click(function() {
-	    	var date = getSmpFormatDate(new Date(), true); 
-	    	console.log(date);
-	    	saveInfo("八戒", "今天天气不错", date);
+	    	var html = "<div class='form-group' style='margin-top: 15px'>"
+            			+"<label class='col-sm-3 control-label'>昵称：</label>"
+            			+"<div class='col-sm-8'>"
+                		+"<input type='text' placeholder='输入你的昵称' class='form-control' id ='nick'>"
+            			+"</div></div>"
+				        +"<div class='form-group' style='margin-top: 65px'>"
+				        +"<label class='col-sm-3 control-label'>我想说：</label>"
+				        +"<div class='col-sm-8'>"
+				        +"<textarea name = 'msg' class='form-control' id = 'msg'></textarea>"
+				        +"</div></div>";
+	    	layer.open({
+	    		  title:"填写信息",
+	    		  type: 1,
+	    		  skin: 'layui-layer-rim', //加上边框
+	    		  area: ['400px', '250px'], //宽高
+	    		  content: html,
+	    		  btnAlign: 'c',
+	    		  btn:["提交"],
+	    		  yes: function(index, layero){
+	    			  var nick = $("#nick").val();
+	    			  var msg = $("#msg").val();
+	    			  console.log("nick:" + nick + "msg:" + msg);
+	    			  if (!nick) {
+	    				  layer.tips('昵称不能为空', '#nick');
+	    				  return false;
+	    			  }
+	    			  if (nick.length > 32) {
+	    				  layer.tips('昵称不能超过32字符', '#nick');
+	    				  return false;
+	    			  }
+	    			  if (!msg) {
+	    				  layer.tips('至少填点什么吧', '#msg');
+	    				  return false;
+	    			  }
+	    			  if (msg.length > 128) {
+	    				  layer.tips('填写内容不能超过128字符', '#msg');
+	    				  return false;
+	    			  }
+	    			  var date = getSmpFormatDate(new Date(), true); 
+	    		      console.log(date);
+	    			  saveInfo(nick, msg, date);
+	    			  layer.closeAll();
+	    			}
+	    		});
 	    });
-	    // 查询信息
-	    $("#wallInfo").click(function() {
-	    	console.log("get info****");
-	    	getWallInfo("10", "0");
+	    // 上一墙
+	    $("#lastWallInfo").click(function() {
+	    	$("#mask").show();
+	    	if (page > 1) {
+	    		page = page - 1;
+	    	}
+	    	if (page < 1) {
+	    		page = 1;
+	    	}
+	    	getWallInfo(page*10, (page-1) * 10);
+	    	
 	    });
+	    // 后一墙
+	    $("#nextWallInfo").click(function() {
+	    	$("#mask").show();
+	    	getWallInfo(page*10 + 10, page * 10);
+	    	page = page + 1;
+	    });
+	    getWallInfo(10, 0);
     </script>
 </body>
 </html>
