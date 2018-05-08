@@ -56,6 +56,9 @@
   		form .form-group{
   			margin-top: 10px;
   		}
+  		#operateDiv button {
+  			margin-right: 10px;
+  		}
 	</style>
 </head>
 
@@ -164,15 +167,23 @@
             </div>
         </div>
         
-        <div class="text-center pb10">
-           	<a class="btn btn-primary btn-rounded " id = "jumpWall">
-        		<i class="fa fa-info-circle"></i> 我要上墙</a>
+        <div class="text-center pb10" id = "operateDiv">
+           	<button class="btn btn-primary btn-rounded " id = "jumpWall">
+        		<i class="fa fa-info-circle"></i> 我要上墙</button>
         		
-        		<a class="btn btn-primary btn-rounded" id = "lastWallInfo">
-        		<i class="fa fa-info-circle"></i> 上一面墙</a>
+        		<button class="btn btn-primary btn-rounded" id = "lastWallInfo">
+        		<i class="fa fa-arrow-circle-left"></i> 上一面墙</button>
         		
-        		<a class="btn btn-primary btn-rounded" id = "nextWallInfo">
-        		<i class="fa fa-info-circle"></i> 下一面墙</a>
+        		<button class="btn btn-primary btn-rounded" id = "nextWallInfo">
+        		<i class="fa fa-arrow-circle-right"></i> 下一面墙</button>
+        		
+        		<!-- <a class="btn btn-primary btn-rounded" id = "newestWallInfo">
+        		<i class="fa fa-joomla"></i> 最后一墙</a> -->
+        		
+        		<a class="btn btn-primary btn-rounded" id = "total">
+        			<i class='fa fa-calculator'></i>
+        		</a>
+        		
         </div>
         
     </div>
@@ -215,12 +226,12 @@
        			  title: '使用说明'
        			  ,content: info
        			});   
-            $(".btn").attr("disabled",true)
+            $(".btn").attr("disabled",true);
         } else {
         	$("#mask").show();
         }
 	    // 合约地址
-	    var dappAddress = "n1oDUY9oFTkucgDwMWanCp1Z1yeBnxPsWBY";
+	    var dappAddress = "n1rR6RWcFhfmzXa5fjGzx6UR1SnjgGe9UCo";
 	    // 抓取信息
 	    function getWallInfo(limit, offset) {
 	    	 var to = dappAddress;
@@ -234,20 +245,50 @@
 	    }
 	    // 抓取信息响应
 	    function handleResp(resp) {
-	    	 var result = resp.result
-	         //console.log("return of rpc call: " + JSON.stringify(result))
-	         if (result === 'null') {
+	    	 var wall =  $("#block-wall");
+	    	 wall.find("li").remove();
+	    	 var res = resp.result;
+	    	 console.log("return of rpc call: " + JSON.stringify(res));
+	    	 res = JSON.parse(res);
+	    	 if (res === 'null') {
+	    		 $("#mask").hide()
+	    		 layer.alert('未获取到任何结果，一会儿再试试吧。', {icon: 6});
+	    		 return false;
+	    	 }
+	    	 var result = res.data;
+	         if (result === 'null' || result == "[]") {
 	        	 // 空
+	        	 layer.alert('未获取到任何结果，一会儿再试试吧。', {icon: 6});
+	        	 return false;
 	         } else {
-	        	 var wall =  $("#block-wall");
-	        	 wall.find("li").remove();
-	        	 $.each(JSON.parse(result), function(idx, obj) {
-	        		 console.log("return of rpc call: " + JSON.stringify(obj));
+	        	 var total = res.total;
+	        	 //result = JSON.parse(result);
+	        	 console.log("return result: " + result);
+	        	 var currMount = 0;
+	        	 $.each(result, function(idx, obj) {
+	        	 console.log("return of rpc call: " + JSON.stringify(obj));
                  var item = "<li> <div> <small>发表于：" + obj.time
                  	+ "</small><h4>" + obj.nick + "</h4><p>"+ obj.msg 
                  	+ "</p> <a href=''> <i class='fa fa-thumbs-up '></i></a></div> </li>"
 	        	 wall.append($(item));
+                 currMount++;
 	        	});
+	        	if (!total) {
+	        		total = 0;
+	        	}
+	        	if (page < 1) {
+	        		page = 1;
+	        	}
+	        	if (total <= ((page-1) * 10 + currMount)) {
+	        		$("#nextWallInfo").attr("disabled",true);
+	        	} else {
+	        		$("#nextWallInfo").attr("disabled",false);
+	        	}
+	        	if (page == 1) {
+	        		$("#lastWallInfo").attr("disabled",true);
+	        		//$("#newestWallInfo").attr("disabled",true);
+	        	}
+	        	$("#total").html("<i class='fa fa-calculator'></i> total:" + total + " &nbsp page:" + page);
 	        	$("#mask").hide()
 	         }
 	    }
@@ -328,8 +369,9 @@
 	    // 后一墙
 	    $("#nextWallInfo").click(function() {
 	    	$("#mask").show();
-	    	getWallInfo(page*10 + 10, page * 10);
 	    	page = page + 1;
+	    	getWallInfo(page*10, (page-1) * 10);
+	    	$("#lastWallInfo").attr("disabled",false);
 	    });
 	    getWallInfo(10, 0);
     </script>

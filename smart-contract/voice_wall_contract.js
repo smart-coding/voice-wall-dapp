@@ -23,6 +23,18 @@ VoiceItem.prototype = {
 	}
 };
 
+//show data 
+var PageVO = function (data, total) {
+	this.data = data;
+	this.total = total;
+}
+
+PageVO.prototype = {
+		toString: function () {
+			return JSON.stringify(this);
+		}
+};
+
 var VoiceWall = function () {
 	LocalContractStorage.defineProperty(this, "size");
 	LocalContractStorage.defineMapProperty(this, "arrayMap");
@@ -102,7 +114,10 @@ VoiceWall.prototype = {
             var obj = this.repo.get(key);
             result.push(obj);
         }
-        return result;
+        var pageVO = new PageVO();
+        pageVO.data = result;
+        pageVO.total = this.size.toString();
+        return pageVO;
     },
     del: function (key) {
     	// TODO 
