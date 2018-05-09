@@ -1,5 +1,9 @@
 # voice-wall-dapp
-A dapp smart contact project
+## A dapp smart contact project
+The newest contact addr in nebulas test net
+> n1wFTm2XGR8hAoVjQkX41S3rhPDkjEP4n6q
+c29ff975724dbeb0b2f0bbdc9fae4ea7cd3ab80a0bc1d3417bb5d720e73c8c54
 
-n1rR6RWcFhfmzXa5fjGzx6UR1SnjgGe9UCo
-b6ca6a245e26f4e0f4e4cf4dd4b57ebf9471c0c752c59ab8df7cf9fc1fe3e9a6
+1.you need download[WebExtensionWallet](https://github.com/ChengOrangeJu/WebExtensionWallet) and install it in your Chrome brower.
+2.Download the *voice-wall-dapp* and unzip it ,open it with your Chrome brower.
+3.only has Chinese version now.

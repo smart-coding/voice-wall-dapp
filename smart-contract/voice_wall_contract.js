@@ -118,9 +118,6 @@ VoiceWall.prototype = {
         pageVO.data = result;
         pageVO.total = this.size.toString();
         return pageVO;
-    },
-    del: function (key) {
-    	// TODO 
     }
 };
 module.exports = VoiceWall;
