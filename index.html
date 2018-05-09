@@ -85,7 +85,7 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>天明</h4>
                             <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up"></i></a>
+                            <a><i class="fa fa-user"></i></a>
                         </div>
                     </li>
                     <li>
@@ -93,7 +93,7 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>少羽</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-user "></i></a>
                         </div>
                     </li>
                     <li>
@@ -101,7 +101,7 @@
                            <small>2018年5月7日  13:31</small>
                             <h4>班大师</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-user "></i></a>
                         </div>
                     </li>
                     <li>
@@ -109,7 +109,7 @@
                            <small>2018年5月7日  13:31</small>
                             <h4>某某某</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-user "></i></a>
                         </div>
                     </li>
                     <li>
@@ -117,7 +117,7 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>某某某</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-user "></i></a>
                         </div>
                     </li>
                     
@@ -126,7 +126,7 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>某某某</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-user "></i></a>
                         </div>
                     </li>
                      <li>
@@ -134,7 +134,7 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>某某某</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-user "></i></a>
                         </div>
                     </li>
                      <li>
@@ -142,7 +142,7 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>某某某</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-thumbs-up "></i></a>
                         </div>
                     </li>
                      <li>
@@ -150,7 +150,7 @@
                             <small>2018年5月7日  13:31</small>
                             <h4>某某某</h4>
                              <p>今天天气不错！</p>
-                            <a href=""><i class="fa fa-thumbs-up "></i></a>
+                            <a><i class="fa fa-user "></i></a>
                         </div>
                     </li>
                     
@@ -159,7 +159,7 @@
                         	<h4>某某某</h4>
                             <small>2018年5月7日  13:31</small>
                             <p>某某某房间按时发来看的萨芬就离开第三放假啦开发 </p>
-                            <a href=""><i class="fa fa-thumbs-up ">666</i></a>
+                            <a><i class="fa fa-user ">666</i></a>
                         </div>
                     </li>
                 </ul>
@@ -215,7 +215,7 @@
         	$("#mask").show();
         }
 	    // 合约地址
-	    var dappAddress = "n1wFTm2XGR8hAoVjQkX41S3rhPDkjEP4n6q";
+	    var dappAddress = "n1h83E7TPATtEp7tJJqspQx8q5SApkdeTgu";
 	    // 抓取信息
 	    function getWallInfo(limit, offset) {
 	    	 var to = dappAddress;
@@ -253,7 +253,8 @@
 	        	 console.log("return of rpc call: " + JSON.stringify(obj));
                  var item = "<li> <div> <small>发表于：" + obj.time
                  	+ "</small><h4>" + obj.nick + "</h4><p>"+ obj.msg 
-                 	+ "</p> <a href=''> <i class='fa fa-thumbs-up '></i></a></div> </li>"
+                 	+ "</p> <a title='from:" + obj.author 
+                 	+"'> <i class='fa fa-user'></i></a></div> </li>"
 	        	 wall.append($(item));
                  currMount++;
 	        	});
