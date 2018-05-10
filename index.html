@@ -18,6 +18,16 @@
 	
 		body.bg {
 			background: url(lib/img/background.jpg) no-repeat center fixed;
+			background-size:100% 100%; 
+		}
+		
+		#particles {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			height:100%;
+			width:100%;
+			z-index: -1;
 		}
 		.text-center h2{
 			color: #333;
@@ -66,6 +76,7 @@
 </head>
 
 <body class="white-bg bg">
+	  <div id = "particles"></div>
 	  <div class="mask" id ="mask">
          <div class="sk-spinner sk-spinner-wave" style="margin-top: 60px;">
              <div class="sk-rect1"></div>
@@ -200,7 +211,14 @@
     <script src=lib/nebPay.js></script>
     <script src=lib/dateFormat.js></script>
     <script src="lib/plugin/layer/layer.js"></script>
+    <script src="lib/plugin/particleground/jquery.particleground.min.js"></script>
     <script type="text/javascript">
+		$("#particles").particleground({
+		    dotColor: "#cccc99",
+		    lineColor: "#99cccc",
+		    particleRadius: 5,
+		    proximity: 60
+		});
 	    var NebPay = require("nebpay");
 	    var nebPay = new NebPay();
 	    
