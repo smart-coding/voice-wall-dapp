@@ -261,9 +261,10 @@
 	    		 return false;
 	    	 }
 	    	 var result = res.data;
-	         if (result === 'null' || result == "[]") {
-	        	 // 空
-	        	 layer.alert('未获取到任何结果，一会儿再试试吧。', {icon: 6});
+	    	 if (result === 'null' || result == "[]" || result == "") {
+	        	 // 空数据
+	        	 $("#mask").hide();
+	        	 layer.alert('未获取到任何结果，一会儿再试试吧。', {icon: 5});
 	        	 return false;
 	         } else {
 	        	 var total = res.total;
