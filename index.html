@@ -236,7 +236,7 @@
         	$("#mask").show();
         }
 	    // 合约地址
-	    var dappAddress = "n1h83E7TPATtEp7tJJqspQx8q5SApkdeTgu";
+	    var dappAddress = "n1jjJdPBVPc3f6nR3DgFas3xyaZKgJvEUXV";
 	    // 抓取信息
 	    function getWallInfo(limit, offset) {
 	    	 var to = dappAddress;
@@ -256,14 +256,15 @@
 	    	 console.log("return of rpc call: " + JSON.stringify(res));
 	    	 res = JSON.parse(res);
 	    	 if (res === 'null') {
-	    		 $("#mask").hide()
+	    		 $("#mask").hide();
 	    		 layer.alert('未获取到任何结果，一会儿再试试吧。', {icon: 6});
 	    		 return false;
 	    	 }
 	    	 var result = res.data;
-	         if (result === 'null' || result == "[]") {
+	         if (result === 'null' || result == "[]" || result == "") {
 	        	 // 空
-	        	 layer.alert('未获取到任何结果，一会儿再试试吧。', {icon: 6});
+	        	 layer.alert('未获取到任何结果，一会儿再试试吧。', {icon: 5});
+	        	 $("#mask").hide();
 	        	 return false;
 	         } else {
 	        	 var total = res.total;
