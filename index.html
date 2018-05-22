@@ -213,6 +213,9 @@
     <script src="lib/plugin/layer/layer.js"></script>
     <script src="lib/plugin/particleground/jquery.particleground.min.js"></script>
     <script type="text/javascript">
+    	// 颜色变换
+    	var colors = ["#e7eaec", "#ed5565", "#e7eaec", "#1ab394", "#8a6d3b", "#e7eaec","#1ab394",  "#e7eaec", "#1ab394", "#8a6d3b"];
+    	
 		$("#particles").particleground({
 		    dotColor: "#cccc99",
 		    lineColor: "#99cccc",
@@ -268,12 +271,11 @@
 	        	 return false;
 	         } else {
 	        	 var total = res.total;
-	        	 //result = JSON.parse(result);
 	        	 console.log("return result: " + result);
 	        	 var currMount = 0;
 	        	 $.each(result, function(idx, obj) {
 	        	 console.log("return of rpc call: " + JSON.stringify(obj));
-                 var item = "<li> <div> <small>发表于：" + obj.time
+                 var item = "<li> <div style='background:" + colors[idx] +"'> <small>发表于：" + obj.time
                  	+ "</small><h4>" + obj.nick + "</h4><p>"+ obj.msg 
                  	+ "</p> <a title='from:" + obj.author 
                  	+"'> <i class='fa fa-user'></i></a></div> </li>"
