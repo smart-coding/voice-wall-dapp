@@ -119,6 +119,27 @@ VoiceWall.prototype = {
         pageVO.data = result;
         pageVO.total = this.size.toString();
         return pageVO;
+    },
+    forEachOld: function (limit, offset) {
+    	limit = parseInt(limit);
+        offset = parseInt(offset);
+        if(offset > this.size) {
+           throw new Error("offset is not valid");
+        }
+        var number = offset + limit;
+        if(number > this.size){
+          number = this.size;
+        }
+        var result = new Array();
+        for (var i = offset; i < number; i++) {
+            var key = this.arrayMap.get(i);
+            var obj = this.repo.get(key);
+            result.push(obj);
+        }
+        var pageVO = new PageVO();
+        pageVO.data = result;
+        pageVO.total = this.size.toString();
+        return pageVO;
     }
 };
 module.exports = VoiceWall;
