@@ -4263,6 +4263,10 @@ ul.notes li:nth-child(5n) div {
 }
 
 ul.notes li div:focus,ul.notes li div:hover {
+	
+	/* transform: rotateX(180deg)  scale(1.1);
+	-webkit-transform: rotateX(180deg)  scale(1.1);	Safari 和 Chrome
+	-moz-transform: rotateX(180deg)  scale(1.1);	Firefox */
 	-webkit-transform: scale(1.1);
 	-moz-transform: scale(1.1);
 	-o-transform: scale(1.1);
