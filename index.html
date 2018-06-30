@@ -214,7 +214,7 @@
     <script src="lib/plugin/particleground/jquery.particleground.min.js"></script>
     <script type="text/javascript">
     	// 颜色变换
-    	var colors = ["#32e6dc75", "#77ffcc61", "#d1e1ec59", "#64a09440", "#c039d04f", "#e859569c","#2def2a94",  "#0e97f375", "#d8a71f61", "#3f2aec7d"];
+    	var colors = ["#32e6dc75", "#77ffcc61", "#d1e1ec59", "#64a09440", "#c039d04f", "#e8595673","#2def2a5e",  "#0e97f375", "#d8a71f61", "#3f2aec42"];
     	
 		$("#particles").particleground({
 		    dotColor: "#cccc99",
@@ -273,9 +273,16 @@
 	        	 var total = res.total;
 	        	 console.log("return result: " + result);
 	        	 var currMount = 0;
+	        	 var last = -1;// 上一个获取的颜色
 	        	 $.each(result, function(idx, obj) {
 	        	 console.log("return of rpc call: " + JSON.stringify(obj));
-                 var item = "<li> <div style='background:" + colors[idx] +"'> <small>发表于：" + obj.time
+	        	 var rand = Math.floor(Math.random()*10);
+	        	 if (rand == last) {
+	        		 // 颜色重复，重新获取一次
+	        		 rand = Math.floor(Math.random()*10);
+	        	 }
+	        	 last = rand;
+                 var item = "<li> <div style='background:" + colors[rand] +"'> <small>发表于：" + obj.time
                  	+ "</small><h4>" + obj.nick + "</h4><p>"+ obj.msg 
                  	+ "</p> <a title='from:" + obj.author 
                  	+"'> <i class='fa fa-user'></i></a></div> </li>"
